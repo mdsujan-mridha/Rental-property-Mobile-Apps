@@ -18,11 +18,11 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    bedrooms: {
+    bedRoom: {
         type: Number,
         required: true
     },
-    washrooms: {
+    washRoom: {
         type: Number,
         required: true
     },

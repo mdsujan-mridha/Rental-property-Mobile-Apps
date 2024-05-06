@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const app = require('./app');
 const path = require('path');
-
+const cloudinary = require("cloudinary");
 const port = process.env.PORT || 5000
 
 // handle uncaught Exception 
@@ -22,6 +22,13 @@ app.get("/", async (req, res) => {
 
     res.sendFile(path.join(__dirname, '/index.html'));
 
+});
+
+// config coludinary 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
 })
 
 const server = app.listen(port, () => {
