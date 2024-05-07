@@ -2,11 +2,12 @@
 const express = require("express");
 const { newProperty, getAllProperty, updateProperty, deleteProperty, getPropertyDetails, getAllProperties } = require("../controller/propertyController");
 const { adminOnly } = require("../middleware/auth");
+const { singleUpload } = require("../middleware/multer");
 
 const router = express.Router();
 
 // create new property 
-router.route("/property/new").post(newProperty);
+router.route("/property/new").post(singleUpload,newProperty);
 // get all property
 router.route("/properties").get(getAllProperty);
 

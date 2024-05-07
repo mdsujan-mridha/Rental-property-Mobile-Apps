@@ -9,11 +9,11 @@ const ApiFeatures = require("../utils/apiFeatures");
 exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
 
     const { title, rentPrice, location, bedRoom, washRoom, barandha, florNo, category, flatSize, date, phoneNumber } = req.body
+    // console.log(req.body);
+    // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
-    if (!req.file) return next(new ErrorHandler("Please add a image", 400));
-
-    const file = getDataUri(req.file);
-
+    // const file = getDataUri(req.file);
+    const file = req.file;
     const myCloud = await cloudinary.v2.uploader.upload(file.content);
 
     const image = {
@@ -33,13 +33,14 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         flatSize,
         date,
         phoneNumber,
-        photoUrl: [image]
+        image: [image]
 
     });
     res.status(201).json({
         success: true,
         message: "Property created successfully"
     });
+    // console.log(req.body)
 });
 
 // get all property 
@@ -49,7 +50,7 @@ exports.getAllProperty = catchAsyncsErrors(async (req, res, next) => {
     const apiFeature = new ApiFeatures(Property.find(), req.query)
         .search()
         .filter()
-    const properties = await apiFeature.query;
+    let properties = await apiFeature.query;
     let filteredProperty = properties.length;
 
     properties = await apiFeature.query.clone();
