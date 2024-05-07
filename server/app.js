@@ -17,8 +17,11 @@ dotenv.config({ path: "./config/config.env" });
 
 // user 
 const user = require("./router/userRouter");
+// property 
+const property = require("./router/propertyRouter");
 
 app.use("/api/v1", user);
+app.use("/api/v1", property);
 
 
 
