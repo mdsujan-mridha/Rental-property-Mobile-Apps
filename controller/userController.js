@@ -4,7 +4,7 @@ const User = require("../model/userModel");
 // new user 
 exports.createUser = catchAsyncsErrors(async (req, res, next) => {
 
-    const { name, email, _id, phoneNumber, location, photoUrl } = req.body;
+    const { name, email, _id, phoneNumber, location } = req.body;
 
     let user = User.findById(_id);
     if (user) {
@@ -14,7 +14,7 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
         })
     }
 
-    if (!_id || !name || !email || !photoUrl || !phoneNumber || !location) {
+    if (!_id || !name || !email || !phoneNumber || !location) {
         return next(new ErrorHandler("Please fill all the fields", 400));
     }
     user = await User.create({
@@ -23,7 +23,6 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
         _id,
         phoneNumber,
         location,
-        photoUrl
     });
     res.status(201).json({
         success: true,
