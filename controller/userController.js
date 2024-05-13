@@ -3,20 +3,22 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const User = require("../model/userModel");
 // new user 
 exports.createUser = catchAsyncsErrors(async (req, res, next) => {
-
     const { name, email, _id, phoneNumber, location } = req.body;
-
-    let user = User.findById(_id);
+    // Check if user with the given _id already exists
+    let user = await User.findById(_id);
     if (user) {
         return res.status(200).json({
             success: true,
-            message: `Welcome ,${user.name}`,
-        })
+            message: `Welcome, ${user.name}`,
+        });
     }
 
+    // Check if all required fields are provided
     if (!_id || !name || !email || !phoneNumber || !location) {
         return next(new ErrorHandler("Please fill all the fields", 400));
     }
+
+    // Create a new user
     user = await User.create({
         name,
         email,
@@ -24,12 +26,14 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
         phoneNumber,
         location,
     });
+
     res.status(201).json({
         success: true,
-        message: `Welcome ,${user.name}`
-    })
-
+        message: `Welcome, ${user.name}`,
+        user,
+    });
 });
+
 
 // get all user 
 
