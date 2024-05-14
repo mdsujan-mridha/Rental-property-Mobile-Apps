@@ -7,7 +7,7 @@ const router = express.Router();
 // create user 
 router.route("/user/new").post(createUser);
 // get user details 
-router.route("/user/me").get(isAuthenticated,getUserDetails);
+router.route("/user/me").get(getUserDetails);
 // get a single user 
 router.route("/user/:id").get(isAuthenticated, getUser);
 // get all users
