@@ -9,7 +9,7 @@ router.route("/user/new").post(createUser);
 // get user details 
 router.route("/user/me").get(getUserDetails);
 // get a single user 
-router.route("/user/:id").get(isAuthenticated, getUser);
+router.route("/user/:id").get(getUser);
 // get all users
 router.route("/admin/users").get(adminOnly, getAllUsers);
 // delete user 
