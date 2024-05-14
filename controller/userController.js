@@ -1,23 +1,20 @@
 const catchAsyncsErrors = require("../middleware/catchAsyncsErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const User = require("../model/userModel");
+const sendToken = require("../utils/jwtToken");
 // new user 
 exports.createUser = catchAsyncsErrors(async (req, res, next) => {
     const { name, email, _id, phoneNumber, location } = req.body;
     // Check if user with the given _id already exists
     let user = await User.findById(_id);
-    if (user) {
-        return res.status(200).json({
-            success: true,
-            message: `Welcome, ${user.name}`,
-        });
-    }
 
+    if (user) {
+        return sendToken(user, 200, res)
+    }
     // Check if all required fields are provided
     if (!_id || !name || !email || !phoneNumber || !location) {
         return next(new ErrorHandler("Please fill all the fields", 400));
     }
-
     // Create a new user
     user = await User.create({
         name,
@@ -26,25 +23,17 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
         phoneNumber,
         location,
     });
-
-    res.status(201).json({
-        success: true,
-        message: `Welcome, ${user.name}`,
-        user,
-    });
+    // Send token to client
+    sendToken(user, 201, res)
 });
 
-
 // get all user 
-
 exports.getAllUsers = catchAsyncsErrors(async (req, res, next) => {
-
     const users = await User.find({});
     res.status(200).json({
         success: true,
         users
     })
-
 });
 // get a single user 
 exports.getUser = catchAsyncsErrors(async (req, res, next) => {
@@ -62,7 +51,6 @@ exports.getUser = catchAsyncsErrors(async (req, res, next) => {
 
 // delete user from database 
 exports.deleteUser = catchAsyncsErrors(async (req, res, next) => {
-
     const user = await User.findById(req.params.id);
     if (!user) {
         return next(new ErrorHandler("User not found", 404));
