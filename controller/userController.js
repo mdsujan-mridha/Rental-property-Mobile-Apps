@@ -50,7 +50,7 @@ exports.getUser = catchAsyncsErrors(async (req, res, next) => {
 });
 // get user details 
 exports.getUserDetails = catchAsyncsErrors(async (req, res, next) => {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.body._id);
     if (!user) {
         return next(new ErrorHandler("User not found", 404));
     }
