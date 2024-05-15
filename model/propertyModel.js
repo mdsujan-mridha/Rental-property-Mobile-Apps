@@ -69,6 +69,10 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    looking: {
+        type: String,
+        default: 'Family'
+    },
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
