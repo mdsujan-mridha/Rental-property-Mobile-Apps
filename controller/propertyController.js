@@ -8,7 +8,7 @@ const ApiFeatures = require("../utils/apiFeatures");
 // create new property 
 exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
 
-    const { title, rentPrice, location, bedRoom, washRoom, barandha, florNo, category, flatSize, date, phoneNumber, others, gasBill, waterBill, electricityBill, serviceCharge, looking } = req.body
+    const { title, rentPrice, location, bedRoom, washRoom, barandha, florNo, category, flatSize, date, phoneNumber, others, gasBill, waterBill, electricityBill, serviceCharge, looking, user } = req.body
     // console.log(req.body);
     if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
@@ -20,7 +20,7 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         public_id: myCloud.public_id,
         url: myCloud.secure_url
     }
-    req.body.user = req.user.id;
+
     await Property.create({
         title,
         rentPrice,
@@ -39,6 +39,7 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         serviceCharge,
         phoneNumber,
         looking,
+        user,
         image: [image]
 
     });
