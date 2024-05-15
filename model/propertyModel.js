@@ -50,6 +50,26 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    others: {
+        type: Array,
+    },
+    gasBill: {
+        type: String,
+        required: true,
+    },
+    waterBill: {
+        type: String,
+        required: true
+    },
+    electricityBill: {
+        type: String,
+        required: true
+    },
+    serviceCharge: {
+        type: String,
+        required: true
+    },
+
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
