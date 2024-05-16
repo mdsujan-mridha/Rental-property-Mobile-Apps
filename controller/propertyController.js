@@ -28,20 +28,10 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         bedRoom,
         washRoom,
         barandha,
-        florNo,
         category,
-        flatSize,
-        date,
-        others,
-        gasBill,
-        waterBill,
-        electricityBill,
-        serviceCharge,
         phoneNumber,
-        looking,
         user,
         image
-
     });
     res.status(201).json({
         success: true,
