@@ -10,7 +10,13 @@ const dotenv = require("dotenv");
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(
+    {
+        origin: "http://localhost:3000",
+        credentials: true,
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    }
+));
 
 // config 
 dotenv.config({ path: "./config/config.env" });
