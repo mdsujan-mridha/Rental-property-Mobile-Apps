@@ -17,8 +17,18 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         barandha,
         category,
         phoneNumber,
-        user,
-        image } = req.body
+        imageUrl,
+        flatSize,
+        date,
+        looking,
+        gasBill,
+        electricityBill,
+        waterBill,
+        serviceCharge,
+        others,
+        florNo,
+        user
+    } = req.body
     // console.log(req.body);
     // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
@@ -41,7 +51,18 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         category,
         phoneNumber,
         user,
-        image
+        imageUrl,
+        flatSize,
+        date,
+        looking,
+        gasBill,
+        electricityBill,
+        waterBill,
+        serviceCharge,
+        others,
+        florNo,
+
+
     });
     res.status(201).json({
         success: true,
