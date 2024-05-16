@@ -30,18 +30,18 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    // florNo: {
-    //     type: Number,
-    //     required: true
-    // },
+    florNo: {
+        type: Number,
+        required: true
+    },
     category: {
         type: String,
         required: true
     },
-    // flatSize: {
-    //     type: Number,
-    //     required: true
-    // },
+    flatSize: {
+        type: Number,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
@@ -50,29 +50,29 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // others: {
-    //     type: Array,
-    // },
-    // gasBill: {
-    //     type: String,
-    //     required: true,
-    // },
-    // waterBill: {
-    //     type: String,
-    //     required: true
-    // },
-    // electricityBill: {
-    //     type: String,
-    //     required: true
-    // },
-    // serviceCharge: {
-    //     type: String,
-    //     required: true
-    // },
-    // looking: {
-    //     type: String,
-    //     default: 'Family'
-    // },
+    others: {
+        type: Array,
+    },
+    gasBill: {
+        type: String,
+        required: true,
+    },
+    waterBill: {
+        type: String,
+        required: true
+    },
+    electricityBill: {
+        type: String,
+        required: true
+    },
+    serviceCharge: {
+        type: String,
+        required: true
+    },
+    looking: {
+        type: String,
+        default: 'Family'
+    },
     user: {
         type: String,
         required: true
