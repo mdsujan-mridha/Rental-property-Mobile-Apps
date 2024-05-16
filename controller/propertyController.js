@@ -26,13 +26,14 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         serviceCharge,
         others,
         florNo,
-        user
+        user,
+        image
     } = req.body
     // console.log(req.body);
     // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
     // const file = getDataUri(req.file);
-    const image = req.file;
+    
     // const myCloud = await cloudinary.v2.uploader.upload(file.content);
 
     // const image = {
