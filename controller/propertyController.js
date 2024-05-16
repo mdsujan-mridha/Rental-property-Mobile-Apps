@@ -8,7 +8,17 @@ const ApiFeatures = require("../utils/apiFeatures");
 // create new property 
 exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
 
-    const { title, rentPrice, location, bedRoom, washRoom, barandha, florNo, category, flatSize, date, phoneNumber, others, gasBill, waterBill, electricityBill, serviceCharge, looking, user,image } = req.body
+    const {
+        title,
+        rentPrice,
+        location,
+        bedRoom,
+        washRoom,
+        barandha,
+        category,
+        phoneNumber,
+        user,
+        image } = req.body
     // console.log(req.body);
     // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
