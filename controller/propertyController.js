@@ -59,7 +59,7 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         serviceCharge,
         others,
         florNo,
-        image
+        image: [image]
     });
     res.status(201).json({
         success: true,
