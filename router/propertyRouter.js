@@ -14,7 +14,7 @@ const { singleUpload } = require("../middleware/multer");
 const router = express.Router();
 
 // create new property 
-router.route("/property/new").post(newProperty);
+router.route("/property/new").post(singleUpload, newProperty);
 // get all property
 router.route("/properties").get(getAllProperty);
 

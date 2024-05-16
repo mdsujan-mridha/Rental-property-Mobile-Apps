@@ -17,7 +17,6 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         barandha,
         category,
         phoneNumber,
-        image,
         flatSize,
         date,
         looking,
@@ -30,16 +29,16 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         user
     } = req.body
     // console.log(req.body);
-    // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
+    if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
-    // const file = getDataUri(req.file);
+    const file = getDataUri(req.file);
     // const file = req.file;
-    // const myCloud = await cloudinary.v2.uploader.upload(file.content);
+    const myCloud = await cloudinary.v2.uploader.upload(file.content);
 
-    // const image = {
-    //     public_id: myCloud.public_id,
-    //     url: myCloud.secure_url
-    // }
+    const image = {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url
+    }
 
     await Property.create({
         title,
@@ -51,7 +50,6 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         category,
         phoneNumber,
         user,
-        image,
         flatSize,
         date,
         looking,
@@ -61,8 +59,7 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         serviceCharge,
         others,
         florNo,
-
-
+        image
     });
     res.status(201).json({
         success: true,
