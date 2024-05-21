@@ -11,8 +11,8 @@ router.route("/user/me").get(getUserDetails);
 // get a single user 
 router.route("/user/:id").get(getUser);
 // get all users
-router.route("/admin/users").get(adminOnly, getAllUsers);
+router.route("/admin/users").get(getAllUsers);
 // delete user 
-router.route("/admin/user/:id").delete(adminOnly, deleteUser);
+router.route("/admin/user/:id").delete(deleteUser);
 
 module.exports = router;
