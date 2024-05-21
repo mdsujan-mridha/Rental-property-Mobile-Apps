@@ -9,7 +9,11 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
     let user = await User.findById(_id);
 
     if (user) {
-        return sendToken(user, 200, res)
+        return res.status(200).json({
+            success: true,
+            message: `Welcome,${user.name}`,
+
+        })
     }
     // Check if all required fields are provided
     if (!_id || !name || !email || !phoneNumber || !location) {
@@ -24,7 +28,10 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
         location,
     });
     // Send token to client
-    sendToken(user, 201, res)
+    return res.status(201).json({
+        success: true,
+        message: `Welcome,${user.name}`
+    })
 });
 
 // get all user 
