@@ -33,7 +33,7 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
     // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
     // const file = getDataUri(req.file);
-    
+
     // const myCloud = await cloudinary.v2.uploader.upload(file.content);
 
     // const image = {
@@ -144,7 +144,7 @@ exports.getAllProperties = catchAsyncsErrors(async (req, res, next) => {
     const properties = await Property.find();
     res.status(200).json({
         success: true,
-        properties
-    });
+        properties,
+    })
 
 })
