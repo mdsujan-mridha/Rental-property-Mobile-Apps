@@ -22,10 +22,10 @@ router.route("/properties").get(getAllProperty);
 router.route("/property/:id").get(getPropertyDetails)
 // update property --admin
 router.route("property/:id")
-    .put(adminOnly, updateProperty)
-    .delete(adminOnly, deleteProperty)
+    .put(updateProperty)
+    .delete(deleteProperty)
 // get property by admin 
-router.route("/property/admin").get(adminOnly, getAllProperties)
+router.route("/property/admin").get(getAllProperties)
 
 
 module.exports = router
