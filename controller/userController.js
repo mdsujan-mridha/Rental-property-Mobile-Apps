@@ -7,7 +7,7 @@ const { getDataUri } = require("../utils/DataUri");
 // new user 
 
 exports.createUser = catchAsyncsErrors(async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, phoneNumber, location } = req.body;
     // console.log(req.file);
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -40,6 +40,8 @@ exports.createUser = catchAsyncsErrors(async (req, res, next) => {
             name,
             email,
             password,
+            phoneNumber,
+            location,
             avatar,
         });
         sendToken(user, 201, res)
@@ -256,21 +258,21 @@ exports.getAllUser = catchAsyncsErrors(async (req, res, next) => {
 // update user role 
 exports.updateUserRole = catchAsyncsErrors(async (req, res, next) => {
     const newUserData = {
-      name: req.body.name,
-      email: req.body.email,
-      role: req.body.role,
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
     };
-  
+
     await User.findByIdAndUpdate(req.params.id, newUserData, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
     });
-  
+
     res.status(200).json({
-      success: true,
+        success: true,
     });
-  });
+});
 
 // delete user from database 
 exports.deleteUser = catchAsyncsErrors(async (req, res, next) => {

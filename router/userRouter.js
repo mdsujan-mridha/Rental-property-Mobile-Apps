@@ -34,7 +34,6 @@ router.route("/user/me").get(isAuthenticated, getUserDetails);
 router.route("/password/update").put(isAuthenticated, updatePassword);
 // update profile 
 router.route("/me/updateProfile").put(isAuthenticated, updateProfile);
-
 // get all users-admin
 router.route("/admin/users").get(isAuthenticated, authorizeRoles("admin"), getAllUsers);
 // delete user 
