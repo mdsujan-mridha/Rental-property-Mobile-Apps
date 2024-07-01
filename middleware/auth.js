@@ -13,13 +13,18 @@ exports.isAuthenticated = catchAsyncsErrors(async (req, res, next) => {
 
 })
 
-exports.adminOnly = catchAsyncsErrors(async (req, res, next) => {
-    const { id } = req.query;
-    if (!id) return next(new ErrorHandler("Login required to access this resource ", 401));
-    const user = await User.findById(id);
-    if (!user) return next(new ErrorHandler("Invalid Id", 401))
-    if (req.user.role !== 'admin') {
-        return next(new ErrorHandler("Admin only", 403))
-    }
-    next();
-})
+// authorizeRoles 
+exports.authorizeRoles = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(
+                new ErrorHandler(
+                    `Role: ${req.user.role} is not allowed to access this resource `,
+                    403
+                )
+            );
+        }
+
+        next();
+    };
+};
