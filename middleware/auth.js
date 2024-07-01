@@ -4,14 +4,17 @@ const User = require("../model/userModel");
 const jwt = require("jsonwebtoken");
 
 exports.isAuthenticated = catchAsyncsErrors(async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return next(new ErrorHandler('Not Logged In', 401));
+    }
 
-    const { token } = req.cookies;
-    if (!token) return next(new ErrorHandler("Not Logged In", 401));
+    const token = authHeader.split(' ')[1];
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decodedData._id);
-    next();
+    req.user = await User.findById(decodedData.id);
 
-})
+    next();
+});
 
 // authorizeRoles 
 exports.authorizeRoles = (...roles) => {
