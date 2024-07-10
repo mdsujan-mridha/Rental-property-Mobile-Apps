@@ -27,19 +27,18 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         others,
         florNo,
         user,
-        image
+
     } = req.body
-    // console.log(req.body);
-    // if (!req.file) return next(new ErrorHandler("Please add a image", 400));
 
-    // const file = getDataUri(req.file);
-
-    // const myCloud = await cloudinary.v2.uploader.upload(file.content);
-
-    // const image = {
-    //     public_id: myCloud.public_id,
-    //     url: myCloud.secure_url
-    // }
+    // Upload profile image to Cloudinary
+    let images = [];
+    if (req.file) {
+        const file = getDataUri(req.file).content;
+        const uploadResult = await cloudinary.uploader.upload(file, {
+            folder: 'properties',
+        });
+        images.push({ public_id: uploadResult.public_id, url: uploadResult.secure_url });
+    }
 
     await Property.create({
         title,
@@ -60,11 +59,13 @@ exports.newProperty = catchAsyncsErrors(async (req, res, next) => {
         serviceCharge,
         others,
         florNo,
-        image
+        images,
+
     });
     res.status(201).json({
         success: true,
         message: "Property created successfully"
+        
     });
     // console.log(req.body)
 });
