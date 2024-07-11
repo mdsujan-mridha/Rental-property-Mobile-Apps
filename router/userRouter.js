@@ -35,7 +35,7 @@ router.route("/password/update").put(isAuthenticated, updatePassword);
 // update profile 
 router.route("/me/updateProfile").put(isAuthenticated, updateProfile);
 // get all users-admin
-router.route("/admin/users").get(isAuthenticated, authorizeRoles("admin"), getAllUsers);
+router.route("/admin/users").get( getAllUsers);
 // get user details for load landlord 
 router.route("/user/:id").get(isAuthenticated, getAllUser);
 // delete user 
