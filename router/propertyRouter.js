@@ -19,7 +19,7 @@ router.route("/property/new").post(isAuthenticated,singleUpload, newProperty);
 router.route("/properties").get(getAllProperty);
 
 // get single property details 
-router.route("/property/:id").get(getPropertyDetails)
+router.route("/property/:id").get(isAuthenticated,getPropertyDetails)
 // update property --admin
 router.route("/property/:id")
     .put(updateProperty)

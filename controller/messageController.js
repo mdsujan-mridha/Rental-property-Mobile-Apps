@@ -3,6 +3,7 @@ const catchAsyncsErrors = require("../middleware/catchAsyncsErrors");
 const Message = require("../model/messageModel");
 const User = require("../model/userModel");
 const sendEmail = require("../utils/sendEmail");
+const Property = require("../model/propertyModel");
 
 // gel all message 
 exports.getAllMessage = catchAsyncsErrors(async (req, res, next) => {
@@ -27,11 +28,12 @@ exports.sendMessage = catchAsyncsErrors(async (req, res, next) => {
     try {
         const newMessage = await message.save();
         const landlord = await User.findById(req.body.receiverId);
+        const property = await Property.findById(req.body.propertyId);
         if (landlord) {
             await sendEmail({
                 email: landlord.email,
                 subject: "New Message Regarding Your Property",
-                message: `You have a new message from ${req.body.message} regarding your property`
+                text: `${req.body.message} \n\n Your Property: \n\n:  ${property}`
             })
         }
         res.status(201).json(newMessage)
